@@ -4,6 +4,7 @@
 resource "azurerm_storage_share" "fs" {
   name                 = var.settings.name
   storage_account_name = var.storage_account_name
+  access_tier          = try(var.settings.access_tier, null)
   quota                = try(var.settings.quota, null)
   metadata             = try(var.settings.metadata, null)
   enabled_protocol     = try(var.settings.enabled_protocol, null)
