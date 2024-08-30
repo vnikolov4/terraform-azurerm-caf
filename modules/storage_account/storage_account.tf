@@ -189,12 +189,12 @@ resource "azurerm_storage_account" "stg" {
         for_each = lookup(var.storage_account.azure_files_authentication, "active_directory", false) == false ? [] : [1]
 
         content {
-          storage_sid         = var.storage_account.azure_files_authentication.active_directory.storage_sid
-          domain_name         = var.storage_account.azure_files_authentication.active_directory.domain_name
-          domain_sid          = var.storage_account.azure_files_authentication.active_directory.domain_sid
-          domain_guid         = var.storage_account.azure_files_authentication.active_directory.domain_guid
-          forest_name         = var.storage_account.azure_files_authentication.active_directory.forest_name
-          netbios_domain_name = var.storage_account.azure_files_authentication.active_directory.netbios_domain_name
+          storage_sid         = try(var.storage_account.azure_files_authentication.active_directory.storage_sid, null)
+          domain_name         = try(var.storage_account.azure_files_authentication.active_directory.domain_name, null)
+          domain_sid          = try(var.storage_account.azure_files_authentication.active_directory.domain_sid, null)
+          domain_guid         = try(var.storage_account.azure_files_authentication.active_directory.domain_guid, null)
+          forest_name         = try(var.storage_account.azure_files_authentication.active_directory.forest_name, null)
+          netbios_domain_name = try(var.storage_account.azure_files_authentication.active_directory.netbios_domain_name, null)
         }
       }
     }
